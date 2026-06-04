@@ -3,8 +3,8 @@ respuesta = 0
 intentos = 0
 
 while True:
-    respuesta = input("Ingresá un número: ")
-    
+    respuesta = int(input("Ingresá un número: "))
+
     if respuesta > numero:
         print("Es más chico")
         intentos += 1
