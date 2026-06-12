@@ -17,6 +17,7 @@ while True:
         promedio_aux += notas[-1]
         n_notas += 1
     else:
+        print(f"- Lista completa: {notas}\n- Promedio: {promedio:.2f}\n- Nota más alta: {max(notas)}\n- Nota más baja: {min(notas)}")
         break
     promedio = promedio_aux / n_notas
     print(f"- Lista completa: {notas}\n- Promedio: {promedio:.2f}\n- Nota más alta: {max(notas)}\n- Nota más baja: {min(notas)}")
