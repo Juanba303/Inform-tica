@@ -29,6 +29,19 @@ def distribucion(notas):
     reprobados_graves = 0
     reprobados = 0
     regulares = 0
+    excelentes = 0
+
+    for nota in notas:
+        if nota <= 3:
+            reprobados_graves += 1
+        elif nota <= 5:
+            reprobados += 1
+        elif nota <= 7:
+            regulares += 1
+        elif nota <= 10:
+            excelentes += 1
+
+    return f"{reprobados_graves} reprobados graves, {reprobados} reprobados, {regulares} regulares, {excelentes} excelentes"
 
 while n_notas <= 0:
     n_notas = int(input("Ingrese la cantidad de notas (número positivo): "))
@@ -39,4 +52,4 @@ for i in range(n_notas):
         notas.pop(i)
         notas.append(int(input(f"Nota inválida, ingrese nota {i+1} (1-10): ")))
 
-print(f"=== ANÁLISIS ===\nNotas: {notas}\nPromedio: {promedio(notas):.2}\nMás alta: {mas_alta(notas)}\nMás baja: {mas_baja(notas)}\nAprobados: {contar_aprobados(notas)} de {len(notas)} ({contar_aprobados(notas) / len(notas):.0%})\nDistribución: ")
+print(f"=== ANÁLISIS ===\nNotas: {notas}\nPromedio: {promedio(notas):.2}\nMás alta: {mas_alta(notas)}\nMás baja: {mas_baja(notas)}\nAprobados: {contar_aprobados(notas)} de {len(notas)} ({contar_aprobados(notas) / len(notas):.0%})\nDistribución: {distribucion(notas)}")
