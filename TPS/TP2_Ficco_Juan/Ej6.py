@@ -19,5 +19,5 @@ def triangulo_invertido(altura):
 
 tabla_multiplicar(4)
 tabla_completa(4)
-triangulo(30)
-triangulo_invertido(30)
+triangulo(4)
+triangulo_invertido(4)

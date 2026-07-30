@@ -57,7 +57,7 @@ def mostrar_resumen(productos, subtotal, descuento, total, es_club):
         print(f"Descuento por cantidad de productos > 5: -$1000")
 
     if es_club == "S":
-        print(f"Descuento por club: 5%")
+        print(f"Descuento por club: -5%")
 
     return f"{subtotal} - {descuento} = {total}"
 
