@@ -15,7 +15,7 @@ print(f"Tenés {vidas} vidas disponibles")
 
 while palabra_revelada != palabra and vidas > 0:
     letra_pedida = str(input("Ingrese una letra: ")).upper()
-    while len(letra_pedida) != 1 or letra_pedida not in "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz":
+    while len(letra_pedida) != 1 or not letra_pedida.isupper() and not letra_pedida.islower():
         letra_pedida = str(input("Ingrese una letra válida: ")).upper()
 
     if letra_pedida not in letras_usadas:
