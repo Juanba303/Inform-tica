@@ -1,0 +1,8 @@
+id,nombre,tipo,altura,peso,experiencia base,hp,ataque,defensa,velocidad
+25,pikachu,electric,4,60,112,35,55,40,90
+42,golbat,poison,16,550,159,75,80,70,90
+26,raichu,electric,8,300,218,60,90,55,110
+321,wailord,water,145,3980,175,170,90,45,60
+900,kleavor,bug,18,890,175,70,135,95,85
+1000,gholdengo,steel,12,300,275,87,60,95,84
+1025,pecharunt,poison,3,3,300,88,88,160,88
