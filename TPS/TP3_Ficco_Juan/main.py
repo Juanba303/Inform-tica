@@ -25,12 +25,13 @@ def consultar_pokemon(clave: str):
     #Primero compruebo si el pokemon existe el archivo csv con un try para que no tenga errores
     try:
         #Leo el archivo
-        with open("pokemones.csv", "r") as f:
+        with open("pokemones.csv", "r", newline="") as f:
             lector = csv.DictReader(f)
             #Reviso fila por fila para ver si el pokemon ya estaba en el archivo
             for fila in lector:
                 #Revisa si el pokemon está en el archivo comparando con su nombre o ID
-                if fila["nombre"] == clave or fila["id"] == clave:
+                #(Puse .lower() porque sino python lo toma como diferente por alguna razón y lo mete en el csv aunque ya esté)
+                if fila["nombre"].lower() == clave.lower() or fila["id"] == clave:
                     #Finalizo el cronómetro y calculo el tiempo de ejecución
                     fin = time.perf_counter()
                     tiempo_ms = (fin - inicio) * 1000
@@ -77,7 +78,7 @@ def consultar_pokemon(clave: str):
         #Defino los campos
         campos = ["id", "nombre", "tipo", "altura", "peso", "experiencia base", "hp", "ataque", "defensa", "velocidad"]
         #Se crea el archivo
-        with open("pokemones.csv", "w") as f:
+        with open("pokemones.csv", "w", newline="") as f:
             #Asigno una variable para los datos
             datos = consultar_api(f"https://pokeapi.co/api/v2/pokemon/{clave}")
             escritor = csv.DictWriter(f, fieldnames=campos)
