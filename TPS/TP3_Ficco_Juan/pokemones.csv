@@ -1,5 +1,4 @@
 id,nombre,tipo,altura,peso,experiencia base,hp,ataque,defensa,velocidad
 25,pikachu,electric,4,60,112,35,55,40,90
-1,bulbasaur,grass,7,69,64,45,49,49,45
 1025,pecharunt,poison,3,3,300,88,88,160,88
-4,charmander,fire,6,85,62,39,52,43,65
+1,bulbasaur,grass,7,69,64,45,49,49,45

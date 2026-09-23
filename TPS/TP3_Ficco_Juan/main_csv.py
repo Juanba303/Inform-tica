@@ -1,4 +1,4 @@
-#Primero importo todo
+#Primero importo todas las librerías
 from fastapi import FastAPI, HTTPException
 import csv
 import requests
@@ -22,7 +22,7 @@ app = FastAPI()
 def consultar_pokemon(clave: str):
     #Inicio el cronómetro
     inicio = time.perf_counter()
-    #Primero compruebo si el pokemon existe el archivo csv con un try para que no tenga errores
+    #Primero compruebo si el pokemon existe en el archivo csv con un try para que no tenga errores
     try:
         #Leo el archivo
         with open("pokemones.csv", "r", newline="") as f:
@@ -38,12 +38,13 @@ def consultar_pokemon(clave: str):
                     #Devuelvo los datos pedidos
                     return {"origen": "csv", "datos": fila, "tiempo_ms": tiempo_ms}              
         #Este es el caso en el que el pokemon no esté en el archivo
-        #Los agrego en el archivo
-        with open("pokemones.csv", "a") as f:
-            #Asigno una variable para los datos
-            datos = consultar_api(f"https://pokeapi.co/api/v2/pokemon/{clave}")
-            if datos is None:
-                raise HTTPException(status_code=404, detail="El Pokemon buscado no existe")
+        #Asigno una variable para los datos
+        datos = consultar_api(f"https://pokeapi.co/api/v2/pokemon/{clave}")
+        #Si el pokemon no existe, retorna un mensaje de error
+        if datos is None:
+            raise HTTPException(status_code=404, detail="El Pokemon buscado no existe")
+        #Lo agrego en el archivo
+        with open("pokemones.csv", "a", newline="") as f:           
             escritor = csv.writer(f)
             escritor.writerow([
                 datos["id"], 
@@ -63,24 +64,27 @@ def consultar_pokemon(clave: str):
         #Devuelvo los datos pedidos
         return {"origen": "PokeAPI", "datos": {
                 "id": datos["id"],
-                "name": datos["name"],
-                "type": datos["types"][0]["type"]["name"],
-                "height": datos["height"],
-                "weight": datos["weight"],
-                "base_experience": datos["base_experience"],
+                "nombre": datos["name"],
+                "tipo": datos["types"][0]["type"]["name"],
+                "altura": datos["height"],
+                "peso": datos["weight"],
+                "experiencia base": datos["base_experience"],
                 "hp": datos["stats"][0]["base_stat"],
-                "attack": datos["stats"][1]["base_stat"],
-                "defense": datos["stats"][2]["base_stat"],
-                "speed": datos["stats"][5]["base_stat"]
+                "ataque": datos["stats"][1]["base_stat"],
+                "defensa": datos["stats"][2]["base_stat"],
+                "velocidad": datos["stats"][5]["base_stat"]
             }, "tiempo_ms": tiempo_ms}
     #Este es el caso en donde el archivo no está creado
     except FileNotFoundError:
         #Defino los campos
         campos = ["id", "nombre", "tipo", "altura", "peso", "experiencia base", "hp", "ataque", "defensa", "velocidad"]
+        #Asigno una variable para los datos
+        datos = consultar_api(f"https://pokeapi.co/api/v2/pokemon/{clave}")
+        #Si el pokemon no existe, retorna un mensaje de error
+        if datos is None:
+            raise HTTPException(status_code=404, detail="El Pokemon buscado no existe")
         #Se crea el archivo
         with open("pokemones.csv", "w", newline="") as f:
-            #Asigno una variable para los datos
-            datos = consultar_api(f"https://pokeapi.co/api/v2/pokemon/{clave}")
             escritor = csv.DictWriter(f, fieldnames=campos)
             #Se escribe el cabezal
             escritor.writeheader()
@@ -105,9 +109,13 @@ def consultar_pokemon(clave: str):
             "origen": "PokeAPI", 
             "datos": {
                 "id": datos["id"],
-                "name": datos["name"],
-                "type": datos["types"][0]["type"]["name"],
-                "height": datos["height"],
-                "weight": datos["weight"],
-                "base_experience": datos["base_experience"]
+                "nombre": datos["name"],
+                "tipo": datos["types"][0]["type"]["name"],
+                "altura": datos["height"],
+                "peso": datos["weight"],
+                "experiencia base": datos["base_experience"],
+                "hp": datos["stats"][0]["base_stat"],
+                "ataque": datos["stats"][1]["base_stat"],
+                "defensa": datos["stats"][2]["base_stat"],
+                "velocidad": datos["stats"][5]["base_stat"]
             }, "tiempo_ms": tiempo_ms}
