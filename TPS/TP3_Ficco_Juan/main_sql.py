@@ -40,8 +40,21 @@ def consultar_pokemon(clave: str):
         #Freno el cronómetro
         fin = time.perf_counter()
         tiempo_ms = (fin - inicio) * 1000
+        #Defino los datos para después retornarlos como diccionario porque sino retorna todo sin clasificación
+        datos_pokemon = {
+        "id": pokemon[0],
+        "nombre": pokemon[1],
+        "tipo": pokemon[2],
+        "altura": pokemon[3],
+        "peso": pokemon[4],
+        "experiencia_base": pokemon[5],
+        "hp": pokemon[6],
+        "ataque": pokemon[7],
+        "defensa": pokemon[8],
+        "velocidad": pokemon[9],
+        }
         #Devuelvo los datos pedidos
-        return {"origen": "SQLite", "datos": f"id: {pokemon[0]}", "tiempo_ms": tiempo_ms}
+        return {"origen": "SQLite", "datos": datos_pokemon, "tiempo_ms": tiempo_ms}
     #Si no está en la tabla
     else:
         #Asigno una variable a los datos
@@ -64,7 +77,19 @@ def consultar_pokemon(clave: str):
         cur.execute("SELECT * FROM pokemones WHERE nombre = ? or id = ?",
             (clave.lower(), clave))
         pokemon = cur.fetchone()
+        datos_pokemon = {
+        "id": pokemon[0],
+        "nombre": pokemon[1],
+        "tipo": pokemon[2],
+        "altura": pokemon[3],
+        "peso": pokemon[4],
+        "experiencia_base": pokemon[5],
+        "hp": pokemon[6],
+        "ataque": pokemon[7],
+        "defensa": pokemon[8],
+        "velocidad": pokemon[9],
+        }
         #Freno el cronómetro
         fin = time.perf_counter()
         tiempo_ms = (fin - inicio) * 1000
-        return {"origen": "PokeAPI", "datos": pokemon, "tiempo_ms": tiempo_ms}
+        return {"origen": "PokeAPI", "datos": datos_pokemon, "tiempo_ms": tiempo_ms}
