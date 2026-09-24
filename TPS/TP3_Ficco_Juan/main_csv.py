@@ -22,7 +22,7 @@ app = FastAPI()
 def consultar_pokemon(clave: str):
     #Inicio el cronómetro
     inicio = time.perf_counter()
-    #Primero compruebo si el pokemon existe en el archivo csv con un try para que no tenga errores
+    #Primero compruebo si existe el archivo csv con un try para que no tenga errores
     try:
         #Leo el archivo
         with open("pokemones.csv", "r", newline="") as f:
